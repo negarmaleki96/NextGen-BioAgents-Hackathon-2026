@@ -1,0 +1,6 @@
+Device: TestPulse Oximeter Model TP-100
+Intended use: Non-invasive measurement of arterial oxygen saturation (SpO2) and pulse rate in adult patients in hospitals and home settings.
+Technology: LED-based pulse oximetry, battery powered, finger clip sensor.
+Product code: DQA
+Predicate: K123456 mentioned as reference.
+Software: None.

@@ -1,0 +1,30 @@
+sidebar:
+  title: "510(k) Submission Assistant"
+  about: |
+    This tool helps you prepare a **510(k) submission draft**. Upload notes, specs,
+    test reports, or even a single paragraph — no eSTAR formatting required at input.
+  steps:
+    - "Describe your device in the text box (one paragraph is enough)"
+    - "Optionally upload supporting documents"
+    - "Click **Analyze**"
+    - "Optionally answer clarifying questions and **Re-analyze**"
+    - "Download your **Submission Package** from the first results tab"
+  upload_types:
+    - "PDF, Word, PowerPoint, Excel"
+    - "Plain text, Markdown, CSV"
+    - "JSON, ZIP bundles"
+  outputs:
+    - "Complete eSTAR-structured submission draft"
+    - "Predicate device recommendations (K-numbers)"
+    - "Substantial equivalence comparison"
+    - "Gap analysis and FDA question predictions"
+    - "HTML + JSON exports for regulatory review"
+  minimal_input_tip: |
+    Example: "We're building a Bluetooth glucose monitor for adults with diabetes,
+    worn on the arm for 14 days, with a mobile app for readings."
+  disclaimer_short: |
+    Drafting assistant only. Not legal advice. Human regulatory review required before FDA submission.
+
+main:
+  short_input_hint: "We'll infer missing details and mark them for your review."
+  min_chars: 30

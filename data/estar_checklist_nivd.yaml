@@ -1,0 +1,147 @@
+version: nIVD_v6.2
+sections:
+  - id: s1_administrative
+    label: Administrative Information
+    fields:
+      - id: applicant_name
+        label: Applicant / Sponsor name
+        profile_field: applicant_name
+        severity: blocker
+      - id: contact
+        label: Regulatory contact information
+        profile_field: contact
+        severity: recommended
+      - id: submission_type
+        label: Submission type (Traditional/Special/Abbreviated)
+        profile_field: submission_type
+        severity: blocker
+      - id: product_code
+        label: Primary product code
+        profile_field: product_code
+        severity: blocker
+
+  - id: s2_device_description
+    label: Device Description
+    fields:
+      - id: device_trade_name
+        label: Device trade name
+        profile_field: device_trade_name
+        severity: blocker
+      - id: device_common_name
+        label: Device common / generic name
+        profile_field: device_common_name
+        severity: blocker
+      - id: principle_of_operation
+        label: Principle of operation
+        profile_field: principle_of_operation
+        severity: blocker
+      - id: materials
+        label: Materials of construction
+        profile_field: materials
+        severity: recommended
+      - id: components_accessories
+        label: Components and accessories
+        profile_field: components_accessories
+        severity: recommended
+      - id: model_numbers
+        label: Model / catalog numbers
+        profile_field: model_numbers
+        severity: recommended
+
+  - id: s3_predicates_se
+    label: Predicates and Substantial Equivalence
+    fields:
+      - id: indications_for_use
+        label: Indications for use
+        profile_field: indications_for_use
+        severity: blocker
+      - id: user_predicate_mentions
+        label: Predicate device identification
+        profile_field: user_predicate_mentions
+        severity: blocker
+        notes: At least one predicate strategy or candidate required
+      - id: intended_use_population
+        label: Intended use population
+        profile_field: intended_use_population
+        severity: recommended
+      - id: contraindications
+        label: Contraindications
+        profile_field: contraindications
+        severity: recommended
+
+  - id: s4_risk_design
+    label: Risk Management and Design Controls
+    fields:
+      - id: risk_analysis
+        label: Risk analysis (hazard analysis / FMEA)
+        profile_field: risk_analysis
+        severity: recommended
+      - id: design_controls
+        label: Design controls documentation
+        profile_field: design_controls
+        severity: recommended
+
+  - id: s5_vv
+    label: Design Verification and Validation
+    fields:
+      - id: bench_testing
+        label: Bench / performance testing
+        profile_field: bench_testing
+        severity: recommended
+      - id: biocompatibility
+        label: Biocompatibility evaluation
+        profile_field: biocompatibility
+        severity: blocker
+        condition: requires_biocompat
+      - id: emc
+        label: EMC / electrical safety testing
+        profile_field: emc
+        severity: blocker
+        condition: requires_emc
+      - id: software_vv
+        label: Software verification and validation
+        profile_field: software_vv
+        severity: blocker
+        condition: requires_software_section
+      - id: clinical_data
+        label: Clinical data (if applicable)
+        profile_field: clinical_data
+        severity: optional
+
+  - id: s5_software_cyber
+    label: Software and Cybersecurity
+    fields:
+      - id: cybersecurity_features
+        label: Cybersecurity documentation
+        profile_field: cybersecurity_features
+        severity: blocker
+        condition: requires_software_section
+
+  - id: s6_labeling
+    label: Labeling
+    fields:
+      - id: ifu_draft
+        label: Instructions for use (IFU)
+        profile_field: ifu_draft
+        severity: recommended
+      - id: labeling_draft
+        label: Labeling (labels, packaging)
+        profile_field: labeling_draft
+        severity: recommended
+
+  - id: s7_additional
+    label: Additional Information
+    fields:
+      - id: consensus_standards_cited
+        label: FDA-recognized consensus standards
+        profile_field: consensus_standards_cited
+        severity: recommended
+      - id: sterilization
+        label: Sterilization method and validation
+        profile_field: sterilization
+        severity: recommended
+        condition: requires_sterilization
+      - id: shelf_life
+        label: Shelf life / expiration dating
+        profile_field: shelf_life
+        severity: optional

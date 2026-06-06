@@ -1,0 +1,11 @@
+# 21 CFR 807.87 — informational reference for Phase 1 gap context
+citation: "21 CFR 807.87"
+required_content:
+  - Establishment registration information
+  - Device name and classification
+  - Proposed labels, labeling, and advertisements
+  - Summary of safety and effectiveness (510(k) summary or statement)
+  - Indications for use
+  - Technological characteristics
+  - Performance data (bench, biocompatibility, etc. as applicable)
+  - Substantial equivalence comparison with predicate device

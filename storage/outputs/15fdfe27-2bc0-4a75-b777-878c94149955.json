@@ -1,0 +1,922 @@
+{
+  "submission_profile": {
+    "profile_id": "15fdfe27-2bc0-4a75-b777-878c94149955",
+    "created_at": "2026-06-06T17:08:49.189579",
+    "input_manifest": [
+      {
+        "doc_id": "24e3a32f-406e-4914-ad81-0bf45a60382d",
+        "doc_name": "user_text",
+        "content_type": "text/plain",
+        "size_bytes": 37
+      }
+    ],
+    "extraction_summary": {
+      "explicit_count": 0,
+      "inferred_count": 1,
+      "missing_count": 36
+    },
+    "device_trade_name": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "device_common_name": {
+      "value": "Continuous glucose monitor",
+      "confidence": 0.6,
+      "provenance": "inferred",
+      "source_refs": [
+        {
+          "doc_id": "24e3a32f-406e-4914-ad81-0bf45a60382d",
+          "doc_name": "user_text",
+          "page": null,
+          "snippet": "building a glucose monitor for adults"
+        }
+      ],
+      "notes": null
+    },
+    "model_numbers": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "product_code": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "regulation_number": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "device_class": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "advisory_committee": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "submission_type": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "indications_for_use": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "intended_use_population": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "intended_use_environment": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "contraindications": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "principle_of_operation": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "energy_source": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "materials": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "software_present": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "cybersecurity_features": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "sterilization": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "shelf_life": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "components_accessories": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "user_predicate_mentions": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "competitive_devices": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "bench_testing": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "biocompatibility": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "emc": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "software_vv": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "clinical_data": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "risk_analysis": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "design_controls": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "labeling_draft": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "ifu_draft": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "consensus_standards_cited": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "applicant_name": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "contact": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "manufacturing_sites": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "patient_contact": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    },
+    "electrical_powered": {
+      "value": null,
+      "confidence": 0.0,
+      "provenance": "missing",
+      "source_refs": [],
+      "notes": null
+    }
+  },
+  "gap_analysis": [
+    {
+      "estar_section_id": "s1_administrative",
+      "field_id": "applicant_name",
+      "label": "Applicant / Sponsor name",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "field_id": "contact",
+      "label": "Regulatory contact information",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "field_id": "submission_type",
+      "label": "Submission type (Traditional/Special/Abbreviated)",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "field_id": "product_code",
+      "label": "Primary product code",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "device_trade_name",
+      "label": "Device trade name",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "device_common_name",
+      "label": "Device common / generic name",
+      "severity": "blocker",
+      "status": "weak",
+      "source_refs": [
+        {
+          "doc_id": "24e3a32f-406e-4914-ad81-0bf45a60382d",
+          "doc_name": "user_text",
+          "page": null,
+          "snippet": "building a glucose monitor for adults"
+        }
+      ],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "principle_of_operation",
+      "label": "Principle of operation",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "materials",
+      "label": "Materials of construction",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "components_accessories",
+      "label": "Components and accessories",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "field_id": "model_numbers",
+      "label": "Model / catalog numbers",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "field_id": "indications_for_use",
+      "label": "Indications for use",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "field_id": "user_predicate_mentions",
+      "label": "Predicate device identification",
+      "severity": "blocker",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": "At least one predicate strategy or candidate required"
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "field_id": "intended_use_population",
+      "label": "Intended use population",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "field_id": "contraindications",
+      "label": "Contraindications",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s4_risk_design",
+      "field_id": "risk_analysis",
+      "label": "Risk analysis (hazard analysis / FMEA)",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s4_risk_design",
+      "field_id": "design_controls",
+      "label": "Design controls documentation",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s5_vv",
+      "field_id": "bench_testing",
+      "label": "Bench / performance testing",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s5_vv",
+      "field_id": "clinical_data",
+      "label": "Clinical data (if applicable)",
+      "severity": "optional",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s6_labeling",
+      "field_id": "ifu_draft",
+      "label": "Instructions for use (IFU)",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s6_labeling",
+      "field_id": "labeling_draft",
+      "label": "Labeling (labels, packaging)",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s7_additional",
+      "field_id": "consensus_standards_cited",
+      "label": "FDA-recognized consensus standards",
+      "severity": "recommended",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    },
+    {
+      "estar_section_id": "s7_additional",
+      "field_id": "shelf_life",
+      "label": "Shelf life / expiration dating",
+      "severity": "optional",
+      "status": "missing",
+      "source_refs": [],
+      "draft_available": true,
+      "notes": null
+    }
+  ],
+  "predicate_candidates": [
+    {
+      "k_number": "K261359",
+      "device_name": "Stelo Glucose Biosensor System",
+      "applicant": "Dexcom, Inc.",
+      "product_code": "SAF",
+      "regulation_number": "862.1355",
+      "device_class": "2",
+      "decision_date": "2026-05-21",
+      "decision_code": "SESE",
+      "statement_or_summary": "Summary",
+      "rank_score": 0.65,
+      "rank_rationale": "strong device name similarity; relatively recent clearance; 510(k) Summary available in openFDA",
+      "risks": [
+        "Predicate chain not verified — openFDA lacks structured predicate field"
+      ],
+      "similarity_signals": {
+        "product_code_match": 0.0,
+        "name_similarity": 1.0,
+        "recency": 0.9985398129135296,
+        "has_summary": 1.0,
+        "sese": 1.0
+      }
+    },
+    {
+      "k_number": "K252818",
+      "device_name": "Dexcom Smart Basal",
+      "applicant": "Dexcom, Inc.",
+      "product_code": "QRX",
+      "regulation_number": "862.1358",
+      "device_class": "2",
+      "decision_date": "2025-11-18",
+      "decision_code": "SESE",
+      "statement_or_summary": "Summary",
+      "rank_score": 0.646,
+      "rank_rationale": "strong device name similarity; relatively recent clearance; 510(k) Summary available in openFDA",
+      "risks": [
+        "Predicate chain not verified — openFDA lacks structured predicate field"
+      ],
+      "similarity_signals": {
+        "product_code_match": 0.0,
+        "name_similarity": 1.0,
+        "recency": 0.9817476614191193,
+        "has_summary": 1.0,
+        "sese": 1.0
+      }
+    },
+    {
+      "k_number": "K253737",
+      "device_name": "Dexcom G7 Continuous Glucose Monitoring (CGM) System; Dexcom G7 15 Day Continuous Glucose Monitoring (CGM) System",
+      "applicant": "Dexcom, Inc.",
+      "product_code": "QBJ",
+      "regulation_number": "862.1355",
+      "device_class": "2",
+      "decision_date": "2026-02-03",
+      "decision_code": "SESE",
+      "statement_or_summary": "Summary",
+      "rank_score": 0.602,
+      "rank_rationale": "strong device name similarity; relatively recent clearance; 510(k) Summary available in openFDA",
+      "risks": [
+        "Predicate chain not verified — openFDA lacks structured predicate field"
+      ],
+      "similarity_signals": {
+        "product_code_match": 0.0,
+        "name_similarity": 0.8181818181818181,
+        "recency": 0.9887748117727584,
+        "has_summary": 1.0,
+        "sese": 1.0
+      }
+    },
+    {
+      "k_number": "K251900",
+      "device_name": "MY01 Continuous Compartmental Pressure Monitor",
+      "applicant": "MY01, Inc.",
+      "product_code": "LXC",
+      "regulation_number": "",
+      "device_class": "U",
+      "decision_date": "2026-01-16",
+      "decision_code": "SESE",
+      "statement_or_summary": "Summary",
+      "rank_score": 0.602,
+      "rank_rationale": "strong device name similarity; relatively recent clearance; 510(k) Summary available in openFDA",
+      "risks": [
+        "Predicate chain not verified — openFDA lacks structured predicate field"
+      ],
+      "similarity_signals": {
+        "product_code_match": 0.0,
+        "name_similarity": 0.8181818181818181,
+        "recency": 0.9871321013004791,
+        "has_summary": 1.0,
+        "sese": 1.0
+      }
+    },
+    {
+      "k_number": "K253710",
+      "device_name": "Dexcom G7 Continuous Glucose Monitoring (CGM) System, Dexcom G7 15 Day Continuous Glucose Monitoring (CGM) System",
+      "applicant": "Dexcom, Inc.",
+      "product_code": "QBJ",
+      "regulation_number": "862.1355",
+      "device_class": "2",
+      "decision_date": "2025-12-17",
+      "decision_code": "SESE",
+      "statement_or_summary": "Summary",
+      "rank_score": 0.601,
+      "rank_rationale": "strong device name similarity; relatively recent clearance; 510(k) Summary available in openFDA",
+      "risks": [
+        "Predicate chain not verified — openFDA lacks structured predicate field"
+      ],
+      "similarity_signals": {
+        "product_code_match": 0.0,
+        "name_similarity": 0.8181818181818181,
+        "recency": 0.9843942505133471,
+        "has_summary": 1.0,
+        "sese": 1.0
+      }
+    }
+  ],
+  "se_comparison": {
+    "predicate_k_number": "K261359",
+    "predicate_device_name": "Stelo Glucose Biosensor System",
+    "rows": [
+      {
+        "characteristic": "Indications for Use",
+        "subject_device": "Not provided",
+        "predicate_device": "See 510(k) Summary (not in openFDA metadata)",
+        "comparison_notes": "Compare intended use statements carefully — must not expand indications.",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Device Trade Name",
+        "subject_device": "Not provided",
+        "predicate_device": "Stelo Glucose Biosensor System",
+        "comparison_notes": "",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Technology / Principle of Operation",
+        "subject_device": "Not provided",
+        "predicate_device": "Refer to predicate 510(k) Summary for detailed comparison",
+        "comparison_notes": "Document any technological differences and why they do not raise new SE questions.",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Materials",
+        "subject_device": "Not provided",
+        "predicate_device": "Refer to predicate 510(k) Summary",
+        "comparison_notes": "",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Energy Source",
+        "subject_device": "Not provided",
+        "predicate_device": "Refer to predicate 510(k) Summary",
+        "comparison_notes": "",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Software",
+        "subject_device": "Not provided",
+        "predicate_device": "Refer to predicate 510(k) Summary",
+        "comparison_notes": "Software differences often raise different questions — document thoroughly.",
+        "raises_different_questions": false
+      },
+      {
+        "characteristic": "Product Code",
+        "subject_device": "Not provided",
+        "predicate_device": "SAF",
+        "comparison_notes": "Same product code supports SE; different code requires justification.",
+        "raises_different_questions": false
+      }
+    ],
+    "narrative_draft": "DRAFT — REQUIRES REGULATORY REVIEW\n\nSubstantial Equivalence Comparison\nSubject Device: Not provided\nPredicate Device: Stelo Glucose Biosensor System (K261359)\nPredicate Applicant: Dexcom, Inc.\nPredicate Clearance Date: 2026-05-21\n\nThe subject device is substantially equivalent to the predicate device Stelo Glucose Biosensor System (K-number K261359) because it has the same intended use and does not raise different questions of safety and effectiveness. [REGULATORY REVIEWER: Complete this narrative with specific technological comparisons and justification for any differences. Predicate 510(k) Summary must be obtained from FDA for detailed comparison.]\n",
+    "confidence_notes": [
+      "indications_for_use: missing — comparison is incomplete",
+      "principle_of_operation: missing — comparison is incomplete",
+      "materials: missing — comparison is incomplete"
+    ]
+  },
+  "estar_drafts": [
+    {
+      "estar_section_id": "s1_administrative",
+      "section_label": "Administrative Information",
+      "field_id": "applicant_name",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Applicant / Sponsor name]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "section_label": "Administrative Information",
+      "field_id": "contact",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Regulatory contact information]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "section_label": "Administrative Information",
+      "field_id": "submission_type",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Submission type (Traditional/Special/Abbreviated)]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s1_administrative",
+      "section_label": "Administrative Information",
+      "field_id": "product_code",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Primary product code]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "device_trade_name",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Device trade name]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "device_common_name",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\nKnown information: Continuous glucose monitor\n\n[DRAFT PLACEHOLDER for Device common / generic name]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "principle_of_operation",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Principle of operation]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "materials",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Materials of construction]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "components_accessories",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Components and accessories]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s2_device_description",
+      "section_label": "Device Description",
+      "field_id": "model_numbers",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Model / catalog numbers]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "section_label": "Predicates and Substantial Equivalence",
+      "field_id": "indications_for_use",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Indications for use]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "section_label": "Predicates and Substantial Equivalence",
+      "field_id": "user_predicate_mentions",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Predicate device identification]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "section_label": "Predicates and Substantial Equivalence",
+      "field_id": "intended_use_population",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Intended use population]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s3_predicates_se",
+      "section_label": "Predicates and Substantial Equivalence",
+      "field_id": "contraindications",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Contraindications]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s4_risk_design",
+      "section_label": "Risk Management and Design Controls",
+      "field_id": "risk_analysis",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Risk analysis (hazard analysis / FMEA)]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s4_risk_design",
+      "section_label": "Risk Management and Design Controls",
+      "field_id": "design_controls",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Design controls documentation]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s5_vv",
+      "section_label": "Design Verification and Validation",
+      "field_id": "bench_testing",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Bench / performance testing]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s5_vv",
+      "section_label": "Design Verification and Validation",
+      "field_id": "clinical_data",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Clinical data (if applicable)]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s6_labeling",
+      "section_label": "Labeling",
+      "field_id": "ifu_draft",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Instructions for use (IFU)]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s6_labeling",
+      "section_label": "Labeling",
+      "field_id": "labeling_draft",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Labeling (labels, packaging)]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s7_additional",
+      "section_label": "Additional Information",
+      "field_id": "consensus_standards_cited",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for FDA-recognized consensus standards]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    },
+    {
+      "estar_section_id": "s7_additional",
+      "section_label": "Additional Information",
+      "field_id": "shelf_life",
+      "content": "DRAFT — REQUIRES REGULATORY REVIEW\n\n[DRAFT PLACEHOLDER for Shelf life / expiration dating]\nRegulatory reviewer must complete this section with verified device-specific information. Do not submit this text without expert review.",
+      "is_draft": true
+    }
+  ],
+  "anticipated_fda_questions": [
+    {
+      "category": "RTA / Technical Screening",
+      "question": "FDA may issue a Refuse to Accept (RTA) hold because required submission elements are missing: Applicant / Sponsor name, Submission type (Traditional/Special/Abbreviated), Primary product code, Device trade name, Device common / generic name.",
+      "risk_level": "high",
+      "mitigation": "Complete all blocker fields before submission to avoid RTA delay.",
+      "triggered_by": [
+        "applicant_name",
+        "submission_type",
+        "product_code",
+        "device_trade_name",
+        "device_common_name",
+        "principle_of_operation",
+        "indications_for_use",
+        "user_predicate_mentions"
+      ]
+    },
+    {
+      "category": "Classification",
+      "question": "What is the appropriate FDA product code and device classification for this device?",
+      "risk_level": "high",
+      "mitigation": "Confirm product code via FDA Product Classification Database.",
+      "triggered_by": [
+        "product_code"
+      ]
+    },
+    {
+      "category": "Risk Management",
+      "question": "FDA may request risk management documentation (ISO 14971 hazard analysis).",
+      "risk_level": "medium",
+      "mitigation": "Complete design risk analysis and link hazards to mitigations and V&V.",
+      "triggered_by": [
+        "risk_analysis"
+      ]
+    }
+  ],
+  "clarifying_questions": [
+    {
+      "question": "What is the FDA product code for your device? (Check FDA Product Classification Database if unsure.)",
+      "field_id": "product_code",
+      "severity": "blocker",
+      "rationale": "Required for eSTAR section: s1_administrative"
+    },
+    {
+      "question": "What is the proposed trade name for your device?",
+      "field_id": "device_trade_name",
+      "severity": "blocker",
+      "rationale": "Required for eSTAR section: s2_device_description"
+    },
+    {
+      "question": "How does the device work? Describe the principle of operation.",
+      "field_id": "principle_of_operation",
+      "severity": "blocker",
+      "rationale": "Required for eSTAR section: s2_device_description"
+    },
+    {
+      "question": "What are the specific indications for use? Include patient population and clinical setting.",
+      "field_id": "indications_for_use",
+      "severity": "blocker",
+      "rationale": "Required for eSTAR section: s3_predicates_se"
+    },
+    {
+      "question": "Do you have a predicate device in mind? Provide a K-number or marketed device name.",
+      "field_id": "user_predicate_mentions",
+      "severity": "blocker",
+      "rationale": "Required for eSTAR section: s3_predicates_se"
+    }
+  ],
+  "disclaimers": [
+    "Drafting assistant only. Not legal or regulatory advice.",
+    "Human regulatory review required before FDA submission.",
+    "openFDA data is not legally validated — verify against official FDA records.",
+    "All LLM-generated content is marked DRAFT and requires expert review."
+  ]
+}

@@ -1,0 +1,18 @@
+Project: GlucoTrack Pro
+
+We're building a Bluetooth-enabled continuous glucose monitor for adults with Type 1 and Type 2 diabetes. The sensor is worn on the upper arm for up to 14 days.
+
+Intended use: The GlucoTrack Pro system is intended for continuous measurement of interstitial fluid glucose levels in adults (18+) with diabetes. Data is transmitted via Bluetooth Low Energy to a companion mobile app (iOS/Android) for display and trend analysis.
+
+Technology: Electrochemical glucose oxidase sensor, BLE 5.0 radio, rechargeable transmitter pod. Patient-contacting materials include medical-grade adhesive and PET substrate.
+
+Software: Mobile app displays glucose values, alerts, and trend arrows. Cloud sync optional. IEC 62304 Class B software.
+
+Predicate idea: Similar to Dexcom G7 (product code PSS?).
+
+Applicant: Acme MedTech Inc.
+Contact: regulatory@acmemedtech.com
+
+Standards cited: ISO 10993-1 (biocompatibility planned), IEC 60601-1-2 (EMC planned), ISO 14971 (risk management in progress).
+
+Bench testing: In progress. Biocompatibility: Not yet started. EMC: Not yet started.
