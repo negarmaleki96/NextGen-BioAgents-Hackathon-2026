@@ -15,8 +15,8 @@ class Settings(BaseSettings):
     )
 
     nebius_api_key: str = ""
-    nebius_model: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"
-    nebius_base_url: str = "https://api.tokenfactory.nebius.com/v1"
+    nebius_model: str = "openai/gpt-oss-120b-fast"
+    nebius_base_url: str = "https://api.tokenfactory.us-central1.nebius.com/v1"
 
     fda_510k_db_path: Path = PROJECT_ROOT / "storage" / "sqlite" / "510k.db"
     fda_510k_json_path: Path = PROJECT_ROOT / "device-510k-0001-of-0001.json"

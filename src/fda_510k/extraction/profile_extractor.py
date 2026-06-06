@@ -43,10 +43,24 @@ class ProfileExtractor:
     def _field_from_raw(
         self,
         field_name: str,
-        raw: dict[str, Any] | None,
+        raw: dict[str, Any] | str | list | None,
         docs: list[ParsedDocument],
     ) -> ExtractedField:
-        if not raw or raw.get("value") is None:
+        # Some models return a bare scalar/list instead of the expected
+        # {"value": ..., "confidence": ..., "provenance": ...} object.
+        if isinstance(raw, (str, int, float, list)):
+            value = raw if isinstance(raw, list) else str(raw).strip()
+            if not value or (isinstance(value, str) and value.lower() in {"", "n/a", "none", "unknown", "null"}):
+                return ExtractedField.missing()
+            return ExtractedField(
+                value=value,
+                confidence=0.5,
+                provenance=FieldProvenance.INFERRED,
+                source_refs=[],
+                notes=None,
+            )
+
+        if not raw or not isinstance(raw, dict) or raw.get("value") is None:
             return ExtractedField.missing()
 
         provenance = FieldProvenance(raw.get("provenance", "inferred"))
