@@ -9,18 +9,22 @@ import httpx
 
 from fda_510k.config import settings
 
-GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta"
+NEBIUS_DEFAULT_BASE_URL = "https://api.tokenfactory.nebius.com/v1"
 
 
-class GeminiClient:
+class NebiusClient:
+    """OpenAI-compatible client for Nebius Token Factory."""
+
     def __init__(
         self,
         api_key: str | None = None,
         model: str | None = None,
+        base_url: str | None = None,
         timeout: float = 120.0,
     ) -> None:
-        self.api_key = api_key or settings.google_api_key or os.environ.get("GOOGLE_API_KEY", "")
-        self.model = model or settings.gemini_model
+        self.api_key = api_key or settings.nebius_api_key or os.environ.get("NEBIUS_API_KEY", "")
+        self.model = model or settings.nebius_model
+        self.base_url = (base_url or settings.nebius_base_url or NEBIUS_DEFAULT_BASE_URL).rstrip("/")
         self.timeout = timeout
 
     def is_available(self) -> bool:
@@ -28,35 +32,43 @@ class GeminiClient:
 
     def generate(self, prompt: str, *, system: str | None = None, temperature: float = 0.1) -> str:
         if not self.is_available():
-            raise RuntimeError("Google API key not configured. Set GOOGLE_API_KEY in .env or Streamlit secrets.")
+            raise RuntimeError(
+                "Nebius API key not configured. Set NEBIUS_API_KEY in .env or Streamlit secrets."
+            )
 
-        payload: dict[str, Any] = {
-            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": temperature},
-        }
+        messages: list[dict[str, str]] = []
         if system:
-            payload["systemInstruction"] = {"parts": [{"text": system}]}
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
 
-        url = f"{GEMINI_API_BASE}/models/{self.model}:generateContent"
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+        }
+
         resp = httpx.post(
-            url,
-            params={"key": self.api_key},
+            f"{self.base_url}/chat/completions",
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
             json=payload,
             timeout=self.timeout,
         )
         resp.raise_for_status()
         data = resp.json()
 
-        candidates = data.get("candidates") or []
-        if not candidates:
-            raise RuntimeError(f"Gemini returned no candidates: {data}")
+        choices = data.get("choices") or []
+        if not choices:
+            raise RuntimeError(f"Nebius returned no choices: {data}")
 
-        parts = candidates[0].get("content", {}).get("parts") or []
-        text_parts = [part.get("text", "") for part in parts if part.get("text")]
-        if not text_parts:
-            raise RuntimeError(f"Gemini returned empty content: {data}")
+        message = choices[0].get("message") or {}
+        content = message.get("content", "")
+        if not content:
+            raise RuntimeError(f"Nebius returned empty content: {data}")
 
-        return "".join(text_parts)
+        return content
 
     @staticmethod
     def _extract_json(text: str) -> Any:

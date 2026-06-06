@@ -10,7 +10,7 @@ from fda_510k.extraction.prompts.extraction_passes import (
     PASS_4_PREDICATES,
 )
 from fda_510k.ingestion.pipeline import ParsedDocument
-from fda_510k.llm.gemini_client import GeminiClient
+from fda_510k.llm.nebius_client import NebiusClient
 from fda_510k.models.common import ExtractedField, FieldProvenance, SourceRef
 from fda_510k.models.profile import SubmissionProfile
 from fda_510k.tools.predicate_query import _phrase_query
@@ -24,8 +24,8 @@ class ProfileExtractor:
         ("predicates", PASS_4_PREDICATES),
     ]
 
-    def __init__(self, llm: GeminiClient | None = None) -> None:
-        self.llm = llm or GeminiClient()
+    def __init__(self, llm: NebiusClient | None = None) -> None:
+        self.llm = llm or NebiusClient()
 
     def _build_context(self, docs: list[ParsedDocument], max_chunks: int | None = None) -> str:
         max_chunks = max_chunks or settings.max_chunks_per_pass
@@ -147,8 +147,66 @@ class ProfileExtractor:
                 setattr(profile, field_name, candidate)
         return profile
 
+    @staticmethod
+    def _extract_trade_name(text: str) -> str | None:
+        import re
+
+        patterns = [
+            r"\b(?:called|named|brand(?:ed)?(?:\s+name)?|trade\s*name(?:d|\s+is)?|proprietary\s+name(?:\s+is)?|product\s+name(?:\s+is)?)\s+['\"]?([A-Z][A-Za-z0-9][\w-]*(?:\s+[A-Z][\w-]*){0,2})",
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, text)
+            if match:
+                candidate = match.group(1).strip(" '\".,")
+                if candidate and candidate.lower() not in {"the", "a", "an", "it", "my", "our"}:
+                    return candidate
+        return None
+
+    @staticmethod
+    def _extract_applicant(text: str, trade_name: str | None) -> str | None:
+        import re
+
+        lowered = text.lower()
+        # "My company has the same name" / "company is the same name" / "same name"
+        if "company" in lowered and "same name" in lowered and trade_name:
+            return trade_name
+
+        patterns = [
+            r"\b(?:company\s+(?:is\s+|called\s+|named\s+)|manufactured\s+by\s+|made\s+by\s+|developed\s+by\s+|sponsor(?:ed\s+by)?\s+(?:is\s+)?|applicant\s+(?:is\s+)?)['\"]?([A-Z][A-Za-z0-9][\w-]*(?:\s+[A-Z][\w&.,-]*){0,3})",
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, text)
+            if match:
+                candidate = match.group(1).strip(" '\".,")
+                if candidate and candidate.lower() not in {"the", "a", "an", "it", "same"}:
+                    return candidate
+        return None
+
+    @staticmethod
+    def _extract_indications(text: str) -> str | None:
+        import re
+
+        patterns = [
+            r"\b(?:purpose|intended\s+use|intent)\s+(?:is\s+)?(?:to\s+|for\s+)([^.\n]+)",
+            r"\b(?:intended|designed|used|meant|indicated)\s+(?:to\s+|for\s+)([^.\n]+)",
+            # Third-person verb forms only, so device-name nouns ("monitor") don't match.
+            r"\b(measures|monitors|detects|diagnoses|treats|assesses|records|displays)\s+([^.\n]+)",
+        ]
+        for idx, pattern in enumerate(patterns):
+            match = re.search(pattern, text, flags=re.IGNORECASE)
+            if match:
+                if idx == 2:
+                    phrase = f"{match.group(1)} {match.group(2)}".strip(" '\".,")
+                else:
+                    phrase = match.group(1).strip(" '\".,")
+                if len(phrase) < 3:
+                    continue
+                phrase = phrase[0].upper() + phrase[1:]
+                return phrase
+        return None
+
     def _heuristic_extract(self, docs: list[ParsedDocument]) -> SubmissionProfile:
-        """Fallback when Gemini is unavailable or returns sparse fields."""
+        """Fallback when the LLM is unavailable or returns sparse fields."""
         import re
 
         profile = SubmissionProfile()
@@ -182,13 +240,31 @@ class ProfileExtractor:
                 notes="Heuristic device-type extraction from input text",
             )
 
-        first_sentence = re.split(r"[.\n]", full_text.strip(), maxsplit=1)[0].strip()
-        if len(first_sentence) >= 20:
+        trade_name = self._extract_trade_name(full_text)
+        if trade_name:
+            set_field(
+                "device_trade_name",
+                trade_name,
+                confidence=0.55,
+                notes="Heuristic extraction of proprietary/brand name",
+            )
+
+        applicant = self._extract_applicant(full_text, trade_name)
+        if applicant:
+            set_field(
+                "applicant_name",
+                applicant,
+                confidence=0.5,
+                notes="Heuristic extraction of applicant/company",
+            )
+
+        indications = self._extract_indications(full_text)
+        if indications:
             set_field(
                 "indications_for_use",
-                first_sentence,
-                confidence=0.45,
-                notes="Heuristic extraction from opening sentence",
+                indications,
+                confidence=0.5,
+                notes="Heuristic extraction of intended use / purpose",
             )
 
         if any(kw in lowered for kw in ("software", "firmware", "app", "bluetooth", "mobile")):

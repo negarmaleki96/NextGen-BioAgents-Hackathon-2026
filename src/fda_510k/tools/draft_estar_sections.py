@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from fda_510k.config import settings
 from fda_510k.knowledge.checklist import load_estar_checklist
 from fda_510k.models.gap import GapItem
 from fda_510k.models.output import EstarDraft
@@ -23,17 +22,13 @@ def draft_missing_sections(
         field = getattr(profile, profile_field, None)
         section_label = section.section_label if section else gap.estar_section_id
 
-        existing = ""
         if field and field.value is not None:
-            existing = f"Known information: {field.value}\n\n"
-
-        content = (
-            f"{settings.draft_watermark}\n\n"
-            f"{existing}"
-            f"[DRAFT PLACEHOLDER for {gap.label}]\n"
-            f"Regulatory reviewer must complete this section with verified device-specific information. "
-            f"Do not submit this text without expert review."
-        )
+            if isinstance(field.value, list):
+                content = ", ".join(str(v) for v in field.value)
+            else:
+                content = str(field.value).strip()
+        else:
+            content = ""
 
         drafts.append(
             EstarDraft(

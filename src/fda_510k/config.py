@@ -14,8 +14,9 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    google_api_key: str = ""
-    gemini_model: str = "gemini-2.0-flash"
+    nebius_api_key: str = ""
+    nebius_model: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    nebius_base_url: str = "https://api.tokenfactory.nebius.com/v1"
 
     fda_510k_db_path: Path = PROJECT_ROOT / "storage" / "sqlite" / "510k.db"
     fda_510k_json_path: Path = PROJECT_ROOT / "device-510k-0001-of-0001.json"

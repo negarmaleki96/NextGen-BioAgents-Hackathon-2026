@@ -1,3 +1,3 @@
-from fda_510k.llm.gemini_client import GeminiClient
+from fda_510k.llm.nebius_client import NebiusClient
 
-__all__ = ["GeminiClient"]
+__all__ = ["NebiusClient"]

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from fda_510k.config import settings
 from fda_510k.models.predicate import PredicateCandidate, SEComparison, SEComparisonRow
 from fda_510k.models.profile import SubmissionProfile
 
@@ -73,20 +72,18 @@ def generate_se_comparison(
         elif f.provenance.value == "inferred":
             confidence_notes.append(f"{field_name}: inferred — verify before submission")
 
-    narrative = (
-        f"{settings.draft_watermark}\n\n"
-        f"Substantial Equivalence Comparison\n"
-        f"Subject Device: {_val(profile, 'device_trade_name')}\n"
-        f"Predicate Device: {predicate.device_name} ({predicate.k_number})\n"
-        f"Predicate Applicant: {predicate.applicant}\n"
-        f"Predicate Clearance Date: {predicate.decision_date}\n\n"
-        f"The subject device is substantially equivalent to the predicate device "
-        f"{predicate.device_name} (K-number {predicate.k_number}) because it has the same "
-        f"intended use and does not raise different questions of safety and effectiveness. "
-        f"[REGULATORY REVIEWER: Complete this narrative with specific technological comparisons "
-        f"and justification for any differences. Predicate 510(k) Summary must be obtained "
-        f"from FDA for detailed comparison.]\n"
-    )
+    subject = _val(profile, "device_trade_name", default="")
+    indications = _val(profile, "indications_for_use", default="")
+    narrative_parts = [
+        "Substantial Equivalence Comparison",
+        f"Subject Device: {subject}" if subject else "",
+        f"Predicate Device: {predicate.device_name} ({predicate.k_number})",
+        f"Predicate Applicant: {predicate.applicant}",
+        f"Predicate Clearance Date: {predicate.decision_date}",
+    ]
+    if indications:
+        narrative_parts.append(f"Subject Indications for Use: {indications}")
+    narrative = "\n".join(part for part in narrative_parts if part)
 
     return SEComparison(
         predicate_k_number=predicate.k_number,

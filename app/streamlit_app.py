@@ -16,12 +16,12 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 
 def _inject_streamlit_secrets() -> None:
-    if os.environ.get("GOOGLE_API_KEY"):
+    if os.environ.get("NEBIUS_API_KEY"):
         return
     try:
-        key = st.secrets["GOOGLE_API_KEY"]
+        key = st.secrets["NEBIUS_API_KEY"]
         if key:
-            os.environ["GOOGLE_API_KEY"] = key
+            os.environ["NEBIUS_API_KEY"] = key
     except (KeyError, FileNotFoundError, AttributeError):
         pass
 
@@ -30,7 +30,7 @@ _inject_streamlit_secrets()
 
 from fda_510k.agent.graph import run_agent  # noqa: E402
 from fda_510k.config import settings  # noqa: E402
-from fda_510k.llm.gemini_client import GeminiClient  # noqa: E402
+from fda_510k.llm.nebius_client import NebiusClient  # noqa: E402
 from fda_510k.output.estar_mapping import build_complete_estar_mapping  # noqa: E402
 from fda_510k.output.estar_xml_export import attach_estar_xml, resolve_estar_xml  # noqa: E402
 from fda_510k.output.formatter import (  # noqa: E402
@@ -58,11 +58,11 @@ def _load_ui_copy() -> dict:
 
 
 def _system_status() -> dict:
-    llm = GeminiClient()
+    llm = NebiusClient()
     return {
         "llm": llm.is_available(),
         "db": settings.fda_510k_db_path.exists(),
-        "model": settings.gemini_model,
+        "model": settings.nebius_model,
     }
 
 
@@ -90,14 +90,16 @@ def _render_sidebar() -> None:
 
     with st.sidebar.expander("System status"):
         st.sidebar.markdown(
-            f"**LLM (Gemini):** {'Ready' if status['llm'] else 'Offline — template drafting used'}"
+            f"**LLM (Nebius):** {'Ready' if status['llm'] else 'Offline — template drafting used'}"
         )
         st.sidebar.markdown(f"**510(k) database:** {'Loaded' if status['db'] else 'Missing — run import script'}")
         st.sidebar.markdown(f"**Model:** {status['model']}")
         if not status["db"]:
             st.sidebar.code("python scripts/import_510k_db.py", language="bash")
         if not status["llm"]:
-            st.sidebar.caption("Set GOOGLE_API_KEY from [Google AI Studio](https://aistudio.google.com/apikey)")
+            st.sidebar.caption(
+                "Set NEBIUS_API_KEY from [Nebius Token Factory](https://tokenfactory.nebius.com/)"
+            )
 
     st.sidebar.divider()
     st.sidebar.caption(copy.get("disclaimer_short", "Drafting assistant only. Not legal advice."))

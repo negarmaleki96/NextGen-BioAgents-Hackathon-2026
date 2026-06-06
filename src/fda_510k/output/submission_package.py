@@ -64,7 +64,7 @@ def build_submission_package(output: AgentOutput) -> SubmissionPackage:
                 label=item.label,
                 section_id=item.section_id,
                 section_label=item.section_label,
-                content=content or "[Content pending — VERIFY]",
+                content=content or "",
                 provenance=prov,
                 confidence=confidence,
                 requires_review=requires_review,
@@ -83,7 +83,7 @@ def build_submission_package(output: AgentOutput) -> SubmissionPackage:
             if item not in review_items:
                 review_items.append(item)
 
-    filled = sum(1 for f in fields if f.content and f.content != "[Content pending — VERIFY]")
+    filled = sum(1 for f in fields if f.content)
     readiness = filled / len(fields) if fields else 0.0
 
     package = SubmissionPackage(

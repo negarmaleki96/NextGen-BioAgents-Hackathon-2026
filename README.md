@@ -31,13 +31,13 @@ python scripts/import_510k_db.py
 
 This streams `device-510k-0001-of-0001.json` into `storage/sqlite/510k.db`.
 
-### 3. Set up Google AI Studio (recommended)
+### 3. Set up Nebius Token Factory (recommended)
 
-Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey), then:
+Get an API key from [Nebius Token Factory](https://tokenfactory.nebius.com/), then:
 
 ```bash
 cp .env.example .env
-# Edit .env and set GOOGLE_API_KEY=your_key_here
+# Edit .env and set NEBIUS_API_KEY=your_key_here
 ```
 
 If no API key is set, the agent falls back to heuristic extraction and template drafting.
@@ -69,9 +69,9 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Key settings: `GOOGLE_API_KEY`, `GEMINI_MODEL`, `FDA_510K_DB_PATH`, `ENABLE_OCR`.
+Key settings: `NEBIUS_API_KEY`, `NEBIUS_MODEL`, `FDA_510K_DB_PATH`, `ENABLE_OCR`.
 
-For Streamlit Cloud, add `GOOGLE_API_KEY` under **App settings → Secrets**.
+For Streamlit Cloud, add `NEBIUS_API_KEY` under **App settings → Secrets**.
 
 ## Running tests
 
