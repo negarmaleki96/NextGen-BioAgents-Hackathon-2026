@@ -71,7 +71,20 @@ cp .env.example .env
 
 Key settings: `NEBIUS_API_KEY`, `NEBIUS_MODEL`, `FDA_510K_DB_PATH`, `ENABLE_OCR`.
 
-For Streamlit Cloud, add `NEBIUS_API_KEY` under **App settings → Secrets**.
+For Streamlit Cloud, add secrets under **App settings → Secrets**:
+
+```toml
+NEBIUS_API_KEY = "your_key_here"
+NEBIUS_MODEL = "openai/gpt-oss-120b-fast"
+NEBIUS_BASE_URL = "https://api.tokenfactory.us-central1.nebius.com/v1"
+```
+
+## Deploy to Streamlit Community Cloud
+
+1. Push this repo to GitHub (fork: `antmbraun/NextGen-BioAgents-Hackathon-2026`).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub.
+3. Click **New app** → select the repo, branch `main`, main file path `app/streamlit_app.py`.
+4. Add the secrets above, then **Deploy**.
 
 ## Running tests
 

@@ -1,5 +1,5 @@
 sidebar:
-  title: "510(k) Submission Assistant"
+  title: "🥪 PBJ - Predicates, Building & Journey"
   about: |
     This tool helps you prepare a **510(k) submission draft**. Upload notes, specs,
     test reports, or even a single paragraph — no eSTAR formatting required at input.
@@ -26,5 +26,6 @@ sidebar:
     Drafting assistant only. Not legal advice. Human regulatory review required before FDA submission.
 
 main:
+  subheading: "A delicious FDA 510k submission assistant"
   short_input_hint: "We'll infer missing details and mark them for your review."
   min_chars: 30

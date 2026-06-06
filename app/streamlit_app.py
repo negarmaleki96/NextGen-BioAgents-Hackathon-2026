@@ -16,14 +16,16 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 
 def _inject_streamlit_secrets() -> None:
-    if os.environ.get("NEBIUS_API_KEY"):
-        return
-    try:
-        key = st.secrets["NEBIUS_API_KEY"]
-        if key:
-            os.environ["NEBIUS_API_KEY"] = key
-    except (KeyError, FileNotFoundError, AttributeError):
-        pass
+    """Map Streamlit Cloud secrets into env vars for pydantic settings."""
+    for name in ("NEBIUS_API_KEY", "NEBIUS_MODEL", "NEBIUS_BASE_URL"):
+        if os.environ.get(name):
+            continue
+        try:
+            value = st.secrets[name]
+            if value:
+                os.environ[name] = str(value)
+        except (KeyError, FileNotFoundError, AttributeError):
+            pass
 
 
 _inject_streamlit_secrets()
@@ -70,7 +72,7 @@ def _render_sidebar() -> None:
     copy = _load_ui_copy().get("sidebar", {})
     status = _system_status()
 
-    st.sidebar.title(copy.get("title", "510(k) Assistant"))
+    st.sidebar.title(copy.get("title", "🥪 PBJ - Predicates, Building & Journey"))
     st.sidebar.markdown(copy.get("about", "FDA 510(k) drafting assistant."))
 
     st.sidebar.subheader("How to use")
@@ -251,11 +253,16 @@ def _render_se(output) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="510(k) Submission Assistant", page_icon="🏥", layout="wide")
+    st.set_page_config(
+        page_title="PBJ - Predicates, Building & Journey",
+        page_icon="🥪",
+        layout="wide",
+    )
     _render_sidebar()
 
-    st.title("FDA 510(k) Submission Assistant")
+    st.title("🥪 PBJ - Predicates, Building & Journey")
     ui_main = _load_ui_copy().get("main", {})
+    st.subheader(ui_main.get("subheading", "A delicious FDA 510k submission assistant"))
     st.caption("Upload anything — notes, specs, slide decks, test reports, or a single paragraph.")
 
     st.info(DISCLAIMER)
