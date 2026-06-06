@@ -31,14 +31,16 @@ python scripts/import_510k_db.py
 
 This streams `device-510k-0001-of-0001.json` into `storage/sqlite/510k.db`.
 
-### 3. Start Ollama (optional but recommended)
+### 3. Set up Google AI Studio (recommended)
+
+Get a free API key from [Google AI Studio](https://aistudio.google.com/apikey), then:
 
 ```bash
-ollama serve
-ollama pull qwen2.5:3b
+cp .env.example .env
+# Edit .env and set GOOGLE_API_KEY=your_key_here
 ```
 
-If Ollama is unavailable, the agent falls back to heuristic extraction.
+If no API key is set, the agent falls back to heuristic extraction and template drafting.
 
 ### 4. Launch the web UI
 
@@ -67,7 +69,9 @@ Copy `.env.example` to `.env`:
 cp .env.example .env
 ```
 
-Key settings: `OLLAMA_MODEL`, `FDA_510K_DB_PATH`, `ENABLE_OCR`.
+Key settings: `GOOGLE_API_KEY`, `GEMINI_MODEL`, `FDA_510K_DB_PATH`, `ENABLE_OCR`.
+
+For Streamlit Cloud, add `GOOGLE_API_KEY` under **App settings → Secrets**.
 
 ## Running tests
 

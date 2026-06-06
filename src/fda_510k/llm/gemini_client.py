@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from typing import Any
 
@@ -8,45 +9,54 @@ import httpx
 
 from fda_510k.config import settings
 
+GEMINI_API_BASE = "https://generativelanguage.googleapis.com/v1beta"
 
-class OllamaClient:
+
+class GeminiClient:
     def __init__(
         self,
-        base_url: str | None = None,
+        api_key: str | None = None,
         model: str | None = None,
         timeout: float = 120.0,
     ) -> None:
-        self.base_url = (base_url or settings.ollama_base_url).rstrip("/")
-        self.model = model or settings.ollama_model
+        self.api_key = api_key or settings.google_api_key or os.environ.get("GOOGLE_API_KEY", "")
+        self.model = model or settings.gemini_model
         self.timeout = timeout
 
     def is_available(self) -> bool:
-        try:
-            resp = httpx.get(f"{self.base_url}/api/tags", timeout=5.0)
-            return resp.status_code == 200
-        except httpx.HTTPError:
-            return False
+        return bool(self.api_key and self.api_key.strip())
 
     def generate(self, prompt: str, *, system: str | None = None, temperature: float = 0.1) -> str:
-        messages = []
-        if system:
-            messages.append({"role": "system", "content": system})
-        messages.append({"role": "user", "content": prompt})
+        if not self.is_available():
+            raise RuntimeError("Google API key not configured. Set GOOGLE_API_KEY in .env or Streamlit secrets.")
 
-        payload = {
-            "model": self.model,
-            "messages": messages,
-            "stream": False,
-            "options": {"temperature": temperature},
+        payload: dict[str, Any] = {
+            "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+            "generationConfig": {"temperature": temperature},
         }
+        if system:
+            payload["systemInstruction"] = {"parts": [{"text": system}]}
+
+        url = f"{GEMINI_API_BASE}/models/{self.model}:generateContent"
         resp = httpx.post(
-            f"{self.base_url}/api/chat",
+            url,
+            params={"key": self.api_key},
             json=payload,
             timeout=self.timeout,
         )
         resp.raise_for_status()
         data = resp.json()
-        return data.get("message", {}).get("content", "")
+
+        candidates = data.get("candidates") or []
+        if not candidates:
+            raise RuntimeError(f"Gemini returned no candidates: {data}")
+
+        parts = candidates[0].get("content", {}).get("parts") or []
+        text_parts = [part.get("text", "") for part in parts if part.get("text")]
+        if not text_parts:
+            raise RuntimeError(f"Gemini returned empty content: {data}")
+
+        return "".join(text_parts)
 
     @staticmethod
     def _extract_json(text: str) -> Any:

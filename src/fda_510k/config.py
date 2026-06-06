@@ -14,9 +14,8 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    ollama_base_url: str = "http://localhost:11434"
-    ollama_model: str = "qwen2.5:3b"
-    ollama_embed_model: str = "nomic-embed-text"
+    google_api_key: str = ""
+    gemini_model: str = "gemini-2.0-flash"
 
     fda_510k_db_path: Path = PROJECT_ROOT / "storage" / "sqlite" / "510k.db"
     fda_510k_json_path: Path = PROJECT_ROOT / "device-510k-0001-of-0001.json"

@@ -3,7 +3,7 @@ from __future__ import annotations
 from fda_510k.config import settings
 from fda_510k.extraction.prompts.draft_sections import SECTION_DRAFT_SYSTEM, SECTION_DRAFT_USER
 from fda_510k.knowledge.checklist import evaluate_device_conditions, load_estar_checklist
-from fda_510k.llm.ollama_client import OllamaClient
+from fda_510k.llm.gemini_client import GeminiClient
 from fda_510k.models.common import ExtractedField, FieldProvenance
 from fda_510k.models.gap import GapItem
 from fda_510k.models.output import EstarDraft
@@ -143,7 +143,7 @@ def _template_draft(
 
 
 def _llm_draft_field(
-    llm: OllamaClient,
+    llm: GeminiClient,
     field_label: str,
     section_label: str,
     profile: SubmissionProfile,
@@ -176,9 +176,9 @@ def draft_all_estar_sections(
     *,
     predicate: PredicateCandidate | None = None,
     se: SEComparison | None = None,
-    llm: OllamaClient | None = None,
+    llm: GeminiClient | None = None,
 ) -> list[EstarDraft]:
-    llm = llm or OllamaClient()
+    llm = llm or GeminiClient()
     use_llm = llm.is_available()
     conditions = evaluate_device_conditions(profile)
     gap_by_field = {g.field_id: g for g in gaps}

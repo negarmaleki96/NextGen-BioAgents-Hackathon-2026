@@ -10,7 +10,7 @@ from fda_510k.extraction.prompts.extraction_passes import (
     PASS_4_PREDICATES,
 )
 from fda_510k.ingestion.pipeline import ParsedDocument
-from fda_510k.llm.ollama_client import OllamaClient
+from fda_510k.llm.gemini_client import GeminiClient
 from fda_510k.models.common import ExtractedField, FieldProvenance, SourceRef
 from fda_510k.models.profile import SubmissionProfile
 
@@ -23,8 +23,8 @@ class ProfileExtractor:
         ("predicates", PASS_4_PREDICATES),
     ]
 
-    def __init__(self, llm: OllamaClient | None = None) -> None:
-        self.llm = llm or OllamaClient()
+    def __init__(self, llm: GeminiClient | None = None) -> None:
+        self.llm = llm or GeminiClient()
 
     def _build_context(self, docs: list[ParsedDocument], max_chunks: int | None = None) -> str:
         max_chunks = max_chunks or settings.max_chunks_per_pass
@@ -115,7 +115,7 @@ class ProfileExtractor:
         return profile
 
     def _heuristic_extract(self, docs: list[ParsedDocument]) -> SubmissionProfile:
-        """Fallback when Ollama is unavailable — keyword-based extraction."""
+        """Fallback when Gemini is unavailable — keyword-based extraction."""
         profile = SubmissionProfile()
         full_text = "\n".join(d.raw_text for d in docs).lower()
 
@@ -128,7 +128,7 @@ class ProfileExtractor:
                         value,
                         confidence=0.5,
                         provenance=FieldProvenance.INFERRED,
-                        notes="Heuristic extraction (Ollama unavailable)",
+                        notes="Heuristic extraction (Gemini unavailable)",
                     ),
                 )
 

@@ -30,7 +30,7 @@ def test_run_agent_with_text():
     assert output.submission_package.readiness_score >= 0.5
 
 
-def test_heuristic_extraction_without_ollama():
+def test_heuristic_extraction_without_llm():
     pipeline = IngestionPipeline()
     doc = pipeline.ingest_text(
         Path(SAMPLES / "glucose_monitor_notes.txt").read_text(),
