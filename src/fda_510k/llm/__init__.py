@@ -1,3 +1,3 @@
-from fda_510k.llm.ollama_client import OllamaClient
+from fda_510k.llm.nebius_client import NebiusClient
 
-__all__ = ["OllamaClient"]
+__all__ = ["NebiusClient"]

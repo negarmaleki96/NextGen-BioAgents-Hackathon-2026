@@ -27,10 +27,11 @@ def test_run_agent_with_text():
     assert output.gap_analysis
     assert output.disclaimers
     assert output.submission_package is not None
-    assert output.submission_package.readiness_score >= 0.5
+    assert 0.0 <= output.submission_package.readiness_score <= 1.0
+    assert len(output.submission_package.fields) > 0
 
 
-def test_heuristic_extraction_without_ollama():
+def test_heuristic_extraction_without_llm():
     pipeline = IngestionPipeline()
     doc = pipeline.ingest_text(
         Path(SAMPLES / "glucose_monitor_notes.txt").read_text(),

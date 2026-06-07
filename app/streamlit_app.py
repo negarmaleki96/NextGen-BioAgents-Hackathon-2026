@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -13,10 +14,29 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
+
+def _inject_streamlit_secrets() -> None:
+    """Map Streamlit Cloud secrets into env vars for pydantic settings."""
+    for name in ("NEBIUS_API_KEY", "NEBIUS_MODEL", "NEBIUS_BASE_URL"):
+        if os.environ.get(name):
+            continue
+        try:
+            value = st.secrets[name]
+            if value:
+                os.environ[name] = str(value)
+        except (KeyError, FileNotFoundError, AttributeError):
+            pass
+
+
+_inject_streamlit_secrets()
+
 from fda_510k.agent.graph import run_agent  # noqa: E402
-from fda_510k.config import settings  # noqa: E402
-from fda_510k.llm.ollama_client import OllamaClient  # noqa: E402
+from fda_510k.config import get_nebius_model, reload_settings, settings  # noqa: E402
+
+reload_settings()
+from fda_510k.llm.nebius_client import NebiusClient  # noqa: E402
 from fda_510k.output.estar_mapping import build_complete_estar_mapping  # noqa: E402
+from fda_510k.output.estar_xml_export import attach_estar_xml, resolve_estar_xml  # noqa: E402
 from fda_510k.output.formatter import (  # noqa: E402
     format_html_report,
     format_submission_draft_html,
@@ -42,11 +62,11 @@ def _load_ui_copy() -> dict:
 
 
 def _system_status() -> dict:
-    llm = OllamaClient()
+    llm = NebiusClient()
     return {
-        "ollama": llm.is_available(),
+        "llm": llm.is_available(),
         "db": settings.fda_510k_db_path.exists(),
-        "model": settings.ollama_model,
+        "model": get_nebius_model(),
     }
 
 
@@ -54,7 +74,7 @@ def _render_sidebar() -> None:
     copy = _load_ui_copy().get("sidebar", {})
     status = _system_status()
 
-    st.sidebar.title(copy.get("title", "510(k) Assistant"))
+    st.sidebar.title(copy.get("title", "🥪 PBJ - Predicates, Building & Journey"))
     st.sidebar.markdown(copy.get("about", "FDA 510(k) drafting assistant."))
 
     st.sidebar.subheader("How to use")
@@ -73,13 +93,17 @@ def _render_sidebar() -> None:
         st.sidebar.markdown(copy.get("minimal_input_tip", "Even one paragraph works."))
 
     with st.sidebar.expander("System status"):
-        st.sidebar.markdown(f"**LLM (Ollama):** {'Ready' if status['ollama'] else 'Offline — template drafting used'}")
+        st.sidebar.markdown(
+            f"**LLM (Nebius):** {'Ready' if status['llm'] else 'Offline — template drafting used'}"
+        )
         st.sidebar.markdown(f"**510(k) database:** {'Loaded' if status['db'] else 'Missing — run import script'}")
         st.sidebar.markdown(f"**Model:** {status['model']}")
         if not status["db"]:
             st.sidebar.code("python scripts/import_510k_db.py", language="bash")
-        if not status["ollama"]:
-            st.sidebar.caption("Install Ollama for richer extraction: ollama.com/download")
+        if not status["llm"]:
+            st.sidebar.caption(
+                "Set NEBIUS_API_KEY from [Nebius Token Factory](https://tokenfactory.nebius.com/)"
+            )
 
     st.sidebar.divider()
     st.sidebar.caption(copy.get("disclaimer_short", "Drafting assistant only. Not legal advice."))
@@ -99,14 +123,17 @@ def _render_readiness_banner(output) -> None:
 
 
 def _render_submission_package(output) -> None:
+    output = attach_estar_xml(output)
+    st.session_state.output = output
     pkg = output.submission_package
     if not pkg:
         st.warning("Submission package not generated.")
         return
 
     _render_readiness_banner(output)
+    estar_xml = resolve_estar_xml(output, pkg)
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     html_draft = format_submission_draft_html(pkg)
     json_mapping = json.dumps(build_complete_estar_mapping(output, pkg), indent=2)
 
@@ -120,6 +147,15 @@ def _render_submission_package(output) -> None:
             type="primary",
         )
     with col2:
+        st.download_button(
+            "Download eSTAR Data (XML)",
+            estar_xml,
+            file_name="nIVD_eSTAR_7-0_data.xml",
+            mime="application/xml",
+            use_container_width=True,
+            disabled=not estar_xml,
+        )
+    with col3:
         st.download_button(
             "Download Complete eSTAR Mapping (JSON)",
             json_mapping,
@@ -189,6 +225,8 @@ def _render_predicates(output) -> None:
         return
     for i, pred in enumerate(output.predicate_candidates, 1):
         with st.expander(f"#{i} {pred.k_number} — {pred.device_name} (score: {pred.rank_score})"):
+            fda_url = f"https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm?ID={pred.k_number}"
+            st.markdown(f"[View on FDA 510(k) Database ↗]({fda_url})")
             st.write(f"**Applicant:** {pred.applicant}")
             st.write(f"**Product code:** {pred.product_code}")
             st.write(f"**Clearance date:** {pred.decision_date}")
@@ -219,11 +257,16 @@ def _render_se(output) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="510(k) Submission Assistant", page_icon="🏥", layout="wide")
+    st.set_page_config(
+        page_title="PBJ - Predicates, Building & Journey",
+        page_icon="🥪",
+        layout="wide",
+    )
     _render_sidebar()
 
-    st.title("FDA 510(k) Submission Assistant")
+    st.title("🥪 PBJ - Predicates, Building & Journey")
     ui_main = _load_ui_copy().get("main", {})
+    st.subheader(ui_main.get("subheading", "A delicious FDA 510k submission assistant"))
     st.caption("Upload anything — notes, specs, slide decks, test reports, or a single paragraph.")
 
     st.info(DISCLAIMER)
@@ -290,7 +333,7 @@ def main() -> None:
                             file_paths=file_paths,
                             clarifications=st.session_state.clarifications,
                         )
-                        st.session_state.output = output
+                        st.session_state.output = attach_estar_xml(output)
                         st.session_state.pending_reanalyze = False
                         save_output_json(output)
                         status.update(label="Analysis complete", state="complete")
@@ -377,6 +420,14 @@ def main() -> None:
                     file_name="estar_mapping_complete.json",
                     mime="application/json",
                 )
+                estar_xml = resolve_estar_xml(output, output.submission_package)
+                if estar_xml:
+                    st.download_button(
+                        "Download eSTAR Data (XML)",
+                        estar_xml,
+                        file_name="nIVD_eSTAR_7-0_data.xml",
+                        mime="application/xml",
+                    )
 
     st.divider()
     st.caption("Drafting assistant only. Not legal or regulatory advice. Human review required before FDA submission.")

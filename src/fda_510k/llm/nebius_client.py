@@ -6,29 +6,39 @@ from typing import Any
 
 import httpx
 
-from fda_510k.config import settings
+from fda_510k.config import (
+    DEFAULT_NEBIUS_BASE_URL,
+    get_nebius_api_key,
+    get_nebius_base_url,
+    get_nebius_model,
+)
 
 
-class OllamaClient:
+class NebiusClient:
+    """OpenAI-compatible client for Nebius Token Factory."""
+
     def __init__(
         self,
-        base_url: str | None = None,
+        api_key: str | None = None,
         model: str | None = None,
+        base_url: str | None = None,
         timeout: float = 120.0,
     ) -> None:
-        self.base_url = (base_url or settings.ollama_base_url).rstrip("/")
-        self.model = model or settings.ollama_model
+        self.api_key = api_key or get_nebius_api_key()
+        self.model = model or get_nebius_model()
+        self.base_url = (base_url or get_nebius_base_url() or DEFAULT_NEBIUS_BASE_URL).rstrip("/")
         self.timeout = timeout
 
     def is_available(self) -> bool:
-        try:
-            resp = httpx.get(f"{self.base_url}/api/tags", timeout=5.0)
-            return resp.status_code == 200
-        except httpx.HTTPError:
-            return False
+        return bool(self.api_key and self.api_key.strip())
 
     def generate(self, prompt: str, *, system: str | None = None, temperature: float = 0.1) -> str:
-        messages = []
+        if not self.is_available():
+            raise RuntimeError(
+                "Nebius API key not configured. Set NEBIUS_API_KEY in .env or Streamlit secrets."
+            )
+
+        messages: list[dict[str, str]] = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
@@ -36,17 +46,31 @@ class OllamaClient:
         payload = {
             "model": self.model,
             "messages": messages,
-            "stream": False,
-            "options": {"temperature": temperature},
+            "temperature": temperature,
         }
+
         resp = httpx.post(
-            f"{self.base_url}/api/chat",
+            f"{self.base_url}/chat/completions",
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
             json=payload,
             timeout=self.timeout,
         )
         resp.raise_for_status()
         data = resp.json()
-        return data.get("message", {}).get("content", "")
+
+        choices = data.get("choices") or []
+        if not choices:
+            raise RuntimeError(f"Nebius returned no choices: {data}")
+
+        message = choices[0].get("message") or {}
+        content = message.get("content", "")
+        if not content:
+            raise RuntimeError(f"Nebius returned empty content: {data}")
+
+        return content
 
     @staticmethod
     def _extract_json(text: str) -> Any:
